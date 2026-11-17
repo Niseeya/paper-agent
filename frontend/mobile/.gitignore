@@ -1,0 +1,16 @@
+dist/
+node_modules/
+.temp/
+.rn_temp/
+*.log
+.DS_Store
+.idea/
+.vscode/
+.swc/
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+.env
+.env.*.local
+project.private.config.json

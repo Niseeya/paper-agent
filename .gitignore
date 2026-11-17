@@ -14,6 +14,7 @@ data/corpus_state/failed.jsonl
 .mypy_cache/
 node_modules/
 dist/
+frontend/mobile/dist/
 .idea/
 .vscode/
 
@@ -30,3 +31,22 @@ data/corpus_state/failed.jsonl
 *.log
 .HF_HOME/
 .cache/
+
+# 交付素材：录屏与截图体积大，仅本地保留；说明 md 仍入库
+docs/交付/演示录屏/*.webm
+docs/交付/演示录屏/*.mp4
+docs/交付/界面原型与核心功能截图/*.png
+docs/交付/界面原型与核心功能截图/*.jpg
+docs/交付/界面原型与核心功能截图/*.jpeg
+docs/交付/界面原型与核心功能截图/*.webp
+
+# 移动端本地构建与工具缓存
+frontend/mobile/.swc/
+frontend/mobile/android/.gradle/
+frontend/mobile/android/build/
+frontend/mobile/android/app/build/
+frontend/mobile/android/local.properties
+
+# 截图压缩包也不入库
+docs/交付/界面原型与核心功能截图.zip
+docs/交付/**/截图*.zip

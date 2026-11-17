@@ -44,12 +44,17 @@ export EMBEDDING_BACKEND=local EMBEDDING_LOCAL_MODEL=BAAI/bge-m3 EMBEDDING_LOCAL
 export RERANKER_BACKEND=local RERANKER_LOCAL_MODEL=BAAI/bge-reranker-base RERANKER_LOCAL_FILES_ONLY=1
 uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
 
-# 另开终端：前端
+# 另开终端：Web 前端
 cd frontend/web && npm install && npm run dev
+
+# 另开终端：移动端（Taro：H5≈Android 联调 / 微信小程序）
+cd frontend/mobile && npm install && npm run dev:h5
+# 微信：npm run dev:weapp ，用开发者工具打开 dist/
 ```
 
 更完整的部署、入库与向量化步骤见 [`deploy/README.md`](deploy/README.md)。  
-预置论文增量更新见 [`docs/预置论文更新流程.md`](docs/预置论文更新流程.md)。
+预置论文增量更新见 [`docs/预置论文更新流程.md`](docs/预置论文更新流程.md)。  
+移动端说明见 [`frontend/mobile/README.md`](frontend/mobile/README.md)。
 
 ## 主路径（普通用户）
 
@@ -99,6 +104,7 @@ python -m pytest backend/tests/skills/ -q
 ```text
 backend/              API、Skill、工作流、适配器、测试
 frontend/web/         Web 客户端
+frontend/mobile/      Taro（Android H5 / 微信小程序）
 deploy/               Docker Compose 与样例配置
 scripts/              语料同步、向量化、本地 PG、SRS 生成
 docs/                 需求 / 设计说明书与操作说明
