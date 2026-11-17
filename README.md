@@ -84,7 +84,7 @@ cd frontend/web && npm install && npm run dev
 | 对话 | OpenAI 兼容接口（如 DeepSeek），管理端可配 |
 | 导出 | DOCX / PDF 等 |
 
-开发约定与任务清单见 [`AGENTS.md`](AGENTS.md)。需求以同目录《需求规格说明书》为准。
+开发约定与任务清单见 [`AGENTS.md`](AGENTS.md)。需求以 [`docs/需求规格说明书_V1.0.docx`](docs/需求规格说明书_V1.0.docx) 为准。文档索引见 [`docs/README.md`](docs/README.md)。
 
 ## Skill 独立测试
 
@@ -97,12 +97,14 @@ python -m pytest backend/tests/skills/ -q
 ## 目录速览
 
 ```text
-backend/app/          API、Skill、工作流、适配器
+backend/              API、Skill、工作流、适配器、测试
 frontend/web/         Web 客户端
 deploy/               Docker Compose 与样例配置
-scripts/              语料同步、向量化、本地 PG
-论文/                 预置 PDF（经脚本入库，勿手拷进库）
-docs/                 操作说明与设计文档
+scripts/              语料同步、向量化、本地 PG、SRS 生成
+docs/                 需求 / 设计说明书与操作说明
+论文/                 预置 PDF（经脚本入库，勿手拷进库；本地保留不推仓库）
+samples/              本地样例 PDF（如英文论文，不走预置入库）
+data/                 运行时数据（本地，不推仓库）
 ```
 
 ## 安全提示

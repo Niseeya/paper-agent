@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """生成《需求规格说明书》V1.0。"""
 
+from pathlib import Path
+
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.oxml import OxmlElement
@@ -8,7 +10,8 @@ from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor, Twips
 
 TITLE = "基于 RAG 与多 Skill 协同的学术论文研究与生成 AI 智能体系统的设计与实现"
-OUT = "/Users/sw/Desktop/26国培东软/论文智能体/基于RAG与多Skill协同的学术论文研究与生成AI智能体系统的设计与实现_需求规格说明书_V1.0.docx"
+# 仓库根目录下的 docs/，勿写死本机绝对路径
+OUT = str(Path(__file__).resolve().parents[1] / "docs" / "需求规格说明书_V1.0.docx")
 
 FRS = []
 NFRS = []
