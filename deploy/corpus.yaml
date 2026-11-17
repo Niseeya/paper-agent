@@ -1,0 +1,29 @@
+# 预置论文包配置。领域名与术语表可按部署修改。
+domain:
+  name: 国产青春电影与电影市场研究
+  language: zh-CN
+  glossary:
+    - 青春电影
+    - 国产青春片
+    - 电影市场
+    - 叙事策略
+    - 消费文化
+    - 怀旧叙事
+
+corpus:
+  papers_dir: 论文
+  source_type: preset
+  max_file_mb: 30
+  rights_note: 预置论文包，仅用于本系统研究辅助与教学演示
+
+chunking:
+  target_chars: 800
+  overlap_chars: 120
+  max_pages_soft: 200
+
+indexing:
+  # 解析入库与向量化可分两步；正式发布 indexed 语义检索前须跑 scripts/embed_corpus.py
+  require_embedding: false
+  embedding_model: bge-m3
+  embedding_backend: local  # local | http
+  reranker_model: bge-reranker-v2-m3

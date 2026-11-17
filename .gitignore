@@ -1,0 +1,31 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/storage/
+data/exports/
+data/pgdata/
+data/pglogs/
+data/*.db
+data/corpus_state/failed.jsonl
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+node_modules/
+dist/
+.idea/
+.vscode/
+
+# 预置/上传 PDF 体积大且可能有版权限制，本地保留，不推仓库
+论文/
+英文论文/
+*.pdf
+
+# 运行时与本地模型缓存
+data/
+!data/corpus_state/
+data/corpus_state/failed.jsonl
+*.log
+.HF_HOME/
+.cache/

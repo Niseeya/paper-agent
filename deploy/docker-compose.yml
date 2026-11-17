@@ -1,0 +1,75 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: paper_agent
+      POSTGRES_PASSWORD: paper_agent
+      POSTGRES_DB: paper_agent
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paper_agent -d paper_agent"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+    env_file:
+      - ../.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://paper_agent:paper_agent@db:5432/paper_agent
+      REDIS_URL: redis://redis:6379/0
+      PAPERS_DIR: /workspace/论文
+      CORPUS_CONFIG: /workspace/deploy/corpus.yaml
+      DATA_DIR: /workspace/data
+    ports:
+      - "8000:8000"
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    command: celery -A backend.app.workers.celery_app worker --loglevel=INFO
+    env_file:
+      - ../.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://paper_agent:paper_agent@db:5432/paper_agent
+      REDIS_URL: redis://redis:6379/0
+      PAPERS_DIR: /workspace/论文
+      CORPUS_CONFIG: /workspace/deploy/corpus.yaml
+      DATA_DIR: /workspace/data
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  pgdata:
